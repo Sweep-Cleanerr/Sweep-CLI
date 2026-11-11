@@ -4,7 +4,10 @@ Sweep's preview path against the BleachBit CLI preview. Every run is
 preview-only: no files are deleted. Method and limits are in
 [`bench/README.md`](../bench/README.md).
 
-## Sweep 0.5.1 vs BleachBit 6.0.6
+## Sweep 0.6 performance build vs BleachBit 6.0.6
+
+The benchmark binary reported `0.5.1` because it was built before the version
+bump to `0.6.0`; the measured code is the 0.6 performance build.
 
 One same-day pass over all 11 default pairs, with Sweep and BleachBit run
 back-to-back in the same harness session:

@@ -136,7 +136,8 @@ was faster on that pair.
 All 11 default selectors, 220 measured samples, 0 failures:
 `results/compare-bleachbit-20261111-173150.csv` and
 `results/compare-bleachbit-20261111-173150.md`. 10 measured runs + 2 warmups
-per tool per pair, Sweep 0.5.1 built from the current tree, BleachBit 6.0.6
+per tool per pair, the 0.6 performance build (reported as Sweep 0.5.1 before
+the version bump), BleachBit 6.0.6
 (portable), 11th Gen Intel Core i5-1135G7, Windows 11 Pro 10.0.26200. Sweep
 and BleachBit alternated back-to-back in the same session, using the isolated
 `bench/sweep-config.toml`.

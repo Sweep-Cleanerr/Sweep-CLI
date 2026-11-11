@@ -4,6 +4,7 @@
 
 **Fast, preview-first system cleaning for Windows, Linux, and macOS.**
 
+[![Version](https://img.shields.io/badge/version-0.6.0-blue.svg)](Cargo.toml)
 [![License](https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-1.88%2B-orange.svg)](Cargo.toml)
 [![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)](#platform-support)
@@ -91,8 +92,10 @@ it with `--define DIR` and inspect it with `sweep info <cleaner>`.
 
 ## Benchmarks
 
-Sweep 0.5.1 was measured against BleachBit 6.0.6 on Windows 11 with 10 runs
-plus 2 warmups per pair. Preview-only; no files were deleted.
+The 0.6 performance build was measured against BleachBit 6.0.6 on Windows 11
+with 10 runs plus 2 warmups per pair. The benchmark binary reported `0.5.1`
+because it was built before the version bump. Preview-only; no files were
+deleted.
 
 | Selector | Sweep | BleachBit | Speed-up |
 | --- | ---: | ---: | ---: |
