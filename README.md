@@ -4,13 +4,14 @@
 
 **Fast, preview-first system cleaning for Windows, Linux, and macOS.**
 
+[![Release](https://img.shields.io/github/v/release/Sweep-Cleanerr/Sweep-CLI?label=release)](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases)
 [![Version](https://img.shields.io/badge/version-0.6.0-blue.svg)](Cargo.toml)
 [![License](https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-1.88%2B-orange.svg)](Cargo.toml)
 [![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)](#platform-support)
 [![Tests](https://img.shields.io/badge/tests-240%20passing-brightgreen.svg)](#development)
 
-[Quick start](#quick-start) · [Benchmarks](#benchmarks) · [Safety](#safety-model) · [Documentation](#documentation)
+[Quick start](#quick-start) · [Benchmarks](#benchmarks) · [Safety](#safety-model) · [Documentation](#documentation) · [Releases](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases)
 
 </div>
 
@@ -166,6 +167,12 @@ bench/       Reproducible Sweep vs BleachBit benchmark harness
 | [Cleaner format](docs/cleaner-format.md) | TOML schema, variables, filters, trust rules |
 | [Compatibility](docs/compatibility.md) | Provider families and platform coverage |
 | [Benchmarks](docs/BENCHMARKS.md) | Method, hardware, full table, raw results |
+
+## Releases
+
+Release notes and source archives are published on
+[GitHub Releases](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases).
+The current release is [v0.6.0](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/tag/v0.6.0).
 
 ## Development
 
