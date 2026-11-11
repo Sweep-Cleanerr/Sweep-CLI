@@ -1,0 +1,60 @@
+id = "tex"
+name = "TeX Live"
+description = "TeX Live font and format caches from the user tree (regenerated on the next run; documents are untouched)"
+
+[[var]]
+name = "luatex_cache"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/texlive/*/texmf-var/luatex-cache"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.texlive*/texmf-var/luatex-cache"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/texlive/*/texmf-var/luatex-cache"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$USERPROFILE\.texlive*\texmf-var\luatex-cache'
+
+[[var]]
+name = "fmt_cache"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.texlive*/texmf-var/web2c"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/texlive/*/texmf-var/web2c"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$USERPROFILE\.texlive*\texmf-var\web2c'
+
+[[option]]
+id = "luatex_cache"
+label = "LuaTeX font cache"
+description = "Delete the generated font database used by LuaTeX and ConTeXt"
+warning = "The first LuaTeX run afterwards re-builds the font cache and takes noticeably longer."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$luatex_cache$$"
+
+[[option]]
+id = "fmt_cache"
+label = "Format files"
+description = "Delete the dumped format files (*.fmt) in the user tree"
+warning = "Formats are re-generated on the next run, which can take a while. If one is not rebuilt automatically, run 'fmtutil-user --all'."
+
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "$$fmt_cache$$/**/*.fmt"
+type = "f"

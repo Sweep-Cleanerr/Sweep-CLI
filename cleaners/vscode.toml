@@ -1,0 +1,108 @@
+id = "vscode"
+name = "Visual Studio Code"
+description = "VS Code editor: workspace cache, logs and extension data"
+
+[[running]]
+type = "exe"
+value = "code"
+os = "unix"
+
+[[running]]
+type = "exe"
+value = "Code.exe"
+os = "windows"
+
+# VS Code's data directory. Logs, GPUCache and CachedData live directly in it;
+# only workspaceStorage and the settings files are under `User/`.
+#   Linux   ~/.config/Code
+#   macOS   ~/Library/Application Support/Code
+#   Windows %APPDATA%\Code
+[[var]]
+name = "base"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.config/Code"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Application Support/Code"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\Code'
+
+[[var]]
+name = "workspace"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.config/Code/User/workspaceStorage"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Application Support/Code/User/workspaceStorage"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\Code\User\workspaceStorage'
+
+[[var]]
+name = "server"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.vscode-server/data"
+
+[[option]]
+id = "workspace_cache"
+label = "Workspace cache"
+description = "Delete cached workspace storage"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$workspace$$"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Delete VS Code log files"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$base$$/logs"
+
+[[option]]
+id = "gpu_cache"
+label = "GPU cache"
+description = "Delete the GPU and shader caches"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$base$$/GPUCache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$base$$/CachedData"
+
+[[option]]
+id = "remote_server"
+label = "Remote server data"
+description = "Delete VS Code Remote-SSH/container server logs and cached data (extensions and server binaries are kept)"
+os = "unix"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$server$$/logs"
+os = "unix"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$server$$/CachedData"
+os = "unix"

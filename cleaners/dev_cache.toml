@@ -1,0 +1,143 @@
+id = "dev_caches"
+name = "Developer caches"
+description = "npm, pip, cargo, gradle and go download/build caches (projects are kept, re-downloaded when needed)"
+
+[[var]]
+name = "npm"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.npm"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\npm-cache'
+
+[[var]]
+name = "pip"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.cache/pip"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Caches/pip"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\pip\Cache'
+
+[[var]]
+name = "cargo_home"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.cargo"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$USERPROFILE\.cargo'
+
+[[var]]
+name = "gradle_home"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.gradle"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$USERPROFILE\.gradle'
+
+[[var]]
+name = "go_build"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.cache/go-build"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Caches/go-build"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\go-build'
+
+[[var]]
+name = "go_mod"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/go/pkg/mod"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$USERPROFILE\go\pkg\mod'
+
+[[option]]
+id = "npm"
+label = "npm cache"
+description = "Clears the npm cache (re-downloaded by npm install)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$npm$$"
+
+[[option]]
+id = "pip"
+label = "pip cache"
+description = "Clears the pip cache (re-downloaded on the next install)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$pip$$"
+
+[[option]]
+id = "cargo"
+label = "cargo registry"
+description = "Clears the cargo registry and git checkouts (re-downloaded by cargo build)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$cargo_home$$/registry"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$cargo_home$$/git"
+
+[[option]]
+id = "gradle"
+label = "gradle cache"
+description = "Clears Gradle caches and wrapper distributions (re-downloaded on the next build)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$gradle_home$$/caches"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$gradle_home$$/wrapper/dists"
+
+[[option]]
+id = "go"
+label = "go cache"
+description = "Clears the Go build cache and module cache (re-downloaded by go build)"
+warning = "Go module files are read-only; if some remain, run 'go clean -modcache'."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$go_build$$"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$go_mod$$"

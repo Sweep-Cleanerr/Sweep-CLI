@@ -1,0 +1,15 @@
+id = "linux_kernel"
+name = "Old kernels"
+description = "Unused old Linux kernels (the running kernel is never deleted; root required)"
+os = "linux"
+
+[[option]]
+id = "old_kernels"
+label = "Old kernels"
+description = "The running kernel and the newest spare are kept; the rest are removed with the distro tool"
+warning = "Removing kernels cannot be undone. Review the preview and be ready to reboot."
+
+[[option.action]]
+command = "system.old_kernels"
+search = "file"
+path = ""

@@ -1,0 +1,14 @@
+id = "linux_caches"
+name = "User caches"
+description = "Regenerable user/application caches (pip, npm, cargo, mesa, crash reports)"
+os = "linux"
+
+[[option]]
+id = "app_caches"
+label = "Application caches"
+description = "Only safe, regenerable cache directories; live application locks are kept"
+
+[[option.action]]
+command = "system.user_caches"
+search = "file"
+path = ""

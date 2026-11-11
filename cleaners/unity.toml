@@ -1,0 +1,80 @@
+id = "unity"
+name = "Unity"
+description = "Game engine: editor logs and Asset Store downloads (projects, licenses and packages are kept)"
+
+[[running]]
+type = "exe"
+value = "unityhub"
+os = "unix"
+
+[[running]]
+type = "exe"
+value = "Unity Hub.exe"
+os = "windows"
+
+# Global editor log directory, per Unity's "Log files" reference:
+#   Linux   ~/.config/unity3d
+#   macOS   ~/Library/Logs/Unity
+#   Windows %LOCALAPPDATA%\Unity\Editor
+# The log is not under the asset-store directory on Windows (%APPDATA%\Unity),
+# which is what this cleaner used to point at, so it never deleted anything
+# there.
+[[var]]
+name = "logs"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.config/unity3d"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Logs/Unity"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\Unity\Editor'
+
+[[var]]
+name = "asset_store"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.local/share/unity3d/Asset Store-5.x"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Unity/Asset Store-5.x"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\Unity\Asset Store-5.x'
+
+[[option]]
+id = "logs"
+label = "Editor logs"
+description = "Delete editor log files older than 7 days"
+
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "$$logs$$/Editor.log*"
+max_age_days = 7
+type = "f"
+
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "$$logs$$/upm.log*"
+max_age_days = 7
+type = "f"
+
+[[option]]
+id = "asset_store"
+label = "Asset Store downloads"
+description = "Delete downloaded Asset Store packages (re-downloadable from the store)"
+warning = "Re-importing assets requires re-downloading the packages."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$asset_store$$"

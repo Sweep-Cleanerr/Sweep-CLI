@@ -1,0 +1,69 @@
+id = "wechat"
+name = "WeChat"
+description = "WeChat desktop: cache and logs (your chat history is kept)"
+os = "linux"
+
+[[running]]
+type = "exe"
+value = "wechat"
+
+# Editor state (Chromium-style profile) and logs of the Linux 4.x client.
+# The old cleaner pointed at `~/.xwechat/cache` and `~/.config/wechat`,
+# neither of which the client creates.
+[[var]]
+name = "data"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.xwechat"
+
+# Per-account chat data. `cache/` and `temp/` are regenerable; `msg/`,
+# `db_storage/`, `config/` (history, database, settings) are left alone.
+[[var]]
+name = "files"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/Documents/xwechat_files"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.local/share/xwechat_files"
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "Delete WeChat's cache and temporary files"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$files$$/*/cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$files$$/*/temp"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Delete WeChat log files"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$data$$/log"
+
+# `~/.xwechat/log` is a directory on some builds and a file on others.
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "$$data$$/log*"
+type = "f"
+
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "$$data$$/**/*.log*"
+type = "f"

@@ -1,0 +1,46 @@
+id = "julia"
+name = "Julia"
+description = "Julia depot caches: precompiled packages, downloaded artifacts and logs (documents and environments are kept)"
+
+[[var]]
+name = "depot"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.julia"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$USERPROFILE\.julia'
+
+[[option]]
+id = "compiled"
+label = "Precompile cache"
+description = "Delete the precompiled package images (rebuilt automatically on the next import)"
+warning = "The next `using` of a package recompiles it, which is noticeably slower once."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$depot$$/compiled"
+
+[[option]]
+id = "artifacts"
+label = "Downloaded artifacts"
+description = "Delete artifacts fetched by Pkg (re-downloaded by `Pkg.instantiate`)"
+warning = "Projects re-download their artifacts on the next instantiate."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$depot$$/artifacts"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Delete Julia's manifest and package operation logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$depot$$/logs"

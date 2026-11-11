@@ -1,0 +1,26 @@
+id = "linux_crash"
+name = "Crash dumps"
+description = "Apport/ABRT crash reports and the systemd-coredump store (root required)"
+os = "linux"
+
+[[option]]
+id = "dumps"
+label = "Crash reports"
+description = "Reports in /var/crash, /var/spool/abrt and the user abrt cache"
+warning = "System-wide locations need root; they are skipped otherwise."
+
+[[option.action]]
+command = "system.crash_reports"
+search = "file"
+path = ""
+
+[[option]]
+id = "coredumps"
+label = "Coredump store"
+description = "Empties /var/lib/systemd/coredump"
+warning = "If you are actively debugging, review the dumps before deleting them."
+
+[[option.action]]
+command = "system.coredumps"
+search = "file"
+path = ""

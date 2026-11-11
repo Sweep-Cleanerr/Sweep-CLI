@@ -1,0 +1,44 @@
+id = "heroic"
+name = "Heroic Games Launcher"
+description = "GOG/Epic/Amazon game launcher logs and cache"
+os = "linux"
+
+[[running]]
+type = "exe"
+value = "heroic"
+os = "unix"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Launcher and game logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.config/heroic/logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.config/legendary/logs"
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "UI and store cache (game files are never touched)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.cache/heroic"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.config/heroic/Cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.config/heroic/GPUCache"

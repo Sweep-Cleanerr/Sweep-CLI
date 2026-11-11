@@ -1,0 +1,28 @@
+id = "yt_dlp"
+name = "yt-dlp"
+description = "yt-dlp: cached player scripts and extractor data (your downloads are kept)"
+
+[[var]]
+name = "cache"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.cache/yt-dlp"
+# yt-dlp resolves its cache dir as ${XDG_CACHE_HOME}/yt-dlp on every platform,
+# and XDG_CACHE_HOME defaults to ~/.cache. On Windows `~` is %USERPROFILE%, so
+# the cache is %USERPROFILE%\.cache\yt-dlp — NOT %LOCALAPPDATA%\yt-dlp, which
+# yt-dlp never creates (the old value made this action a permanent no-op).
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$USERPROFILE\.cache\yt-dlp'
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "Delete yt-dlp's cached player scripts and extractor data (re-fetched on demand)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$cache$$"

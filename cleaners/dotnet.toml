@@ -1,0 +1,74 @@
+id = "dotnet"
+name = ".NET / NuGet"
+description = "NuGet download and HTTP caches plus the global packages folder (restored on the next build)"
+
+[[var]]
+name = "nuget_http_cache"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.local/share/NuGet/http-cache"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\NuGet\http-cache'
+
+[[var]]
+name = "nuget_v3_cache"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.local/share/NuGet/v3-cache"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\NuGet\v3-cache'
+
+[[var]]
+name = "nuget_scratch"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\Temp\NuGetScratch'
+
+[[var]]
+name = "nuget_packages"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.nuget/packages"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$USERPROFILE\.nuget\packages'
+
+[[option]]
+id = "http_cache"
+label = "NuGet HTTP cache"
+description = "Delete the downloaded package index and response caches (refilled on demand)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$nuget_http_cache$$"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$nuget_v3_cache$$"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$nuget_scratch$$"
+
+[[option]]
+id = "packages"
+label = "Global packages folder"
+description = "Delete every extracted NuGet package from the global folder"
+warning = "Every project re-restores its packages on the next build (can be a large download)."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$nuget_packages$$"

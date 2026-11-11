@@ -1,0 +1,63 @@
+id = "slack"
+name = "Slack"
+description = "Team messaging cache and logs (the session is kept)"
+
+[[running]]
+type = "exe"
+value = "slack"
+os = "unix"
+
+[[running]]
+type = "exe"
+value = "slack.exe"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "Slack"
+os = "macos"
+
+[[var]]
+name = "slack_data"
+[[var.value]]
+os = "linux"
+search = "literal"
+value = "~/.config/Slack"
+[[var.value]]
+os = "macos"
+search = "literal"
+value = "~/Library/Application Support/Slack"
+[[var.value]]
+os = "windows"
+search = "literal"
+value = '$APPDATA\Slack'
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "UI and code cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$slack_data$$/Cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$slack_data$$/Code Cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$slack_data$$/GPUCache"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Client logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$slack_data$$/logs"

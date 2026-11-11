@@ -1,0 +1,24 @@
+id = "zypper"
+name = "Zypper"
+description = "openSUSE package manager cache"
+os = "linux"
+
+[[option]]
+id = "cache"
+label = "Package cache"
+description = "zypper clean --all: removes downloaded packages and metadata"
+
+[[option.action]]
+command = "zypper.clean"
+search = "file"
+path = ""
+
+[[option]]
+id = "deep_cache"
+label = "Deep cache sweep"
+description = "Per-file size preview of /var/cache/zypp, then clean --all"
+
+[[option.action]]
+command = "system.zypp_cache"
+search = "file"
+path = ""

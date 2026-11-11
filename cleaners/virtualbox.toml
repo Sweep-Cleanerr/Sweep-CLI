@@ -1,0 +1,36 @@
+id = "virtualbox"
+name = "VirtualBox"
+description = "Virtual machine logs (disk images and snapshots are kept)"
+os = "linux"
+
+[[running]]
+type = "exe"
+value = "VirtualBox"
+os = "unix"
+
+[[var]]
+name = "vms"
+[[var.value]]
+os = "linux"
+search = "literal"
+value = "~/VirtualBox VMs"
+
+[[option]]
+id = "vm_logs"
+label = "Virtual machine logs"
+description = "Each machine's Logs folder"
+
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "$$vms$$/*/Logs"
+
+[[option]]
+id = "config_logs"
+label = "Manager logs"
+description = "VirtualBox manager log files"
+
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "~/.config/VirtualBox/*.log"

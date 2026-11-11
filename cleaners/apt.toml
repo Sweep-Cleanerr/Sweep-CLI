@@ -1,0 +1,56 @@
+id = "apt"
+name = "APT"
+description = "Debian/Ubuntu package manager cache"
+os = "linux"
+
+[[option]]
+id = "cache"
+label = "Package cache"
+description = "apt-get clean: remove downloaded .deb packages (requires root)"
+
+[[option.action]]
+command = "apt.clean"
+search = "file"
+path = ""
+
+[[option]]
+id = "autoclean"
+label = "Obsolete packages"
+description = "apt-get autoclean: remove only obsolete downloaded packages (requires root)"
+
+[[option.action]]
+command = "apt.autoclean"
+search = "file"
+path = ""
+
+[[option]]
+id = "autoremove"
+label = "Unneeded packages"
+description = "apt-get autoremove: remove packages that are no longer required (requires root)"
+warning = "This may remove packages no longer depended on. Review carefully."
+
+[[option.action]]
+command = "apt.autoremove"
+search = "file"
+path = ""
+
+[[option]]
+id = "deep_cache"
+label = "Deep cache sweep"
+description = "Shows the size of each cached .deb file, then runs apt-get clean (same result as Package cache, with a preview; requires root)"
+
+[[option.action]]
+command = "system.apt_cache"
+search = "file"
+path = ""
+
+[[option]]
+id = "package_lists"
+label = "Package lists"
+description = "Clears /var/lib/apt/lists (re-downloaded by apt-get update; can hold hundreds of MB; requires root)"
+warning = "Until apt-get update runs again, apt install and apt upgrade cannot find packages."
+
+[[option.action]]
+command = "system.apt_lists"
+search = "file"
+path = ""

@@ -1,0 +1,29 @@
+id = "proton_ge"
+name = "Proton-GE"
+description = "DXVK shader state caches used by Proton/Wine games (the Proton builds themselves are kept)"
+os = "linux"
+
+[[option]]
+id = "dxvk_cache"
+label = "DXVK state caches"
+description = "Delete *.dxvk-cache files (shaders recompile once, then run as before)"
+
+# DXVK keeps its state cache in `%LOCALAPPDATA%\dxvk` inside each Wine prefix
+# (or wherever DXVK_STATE_CACHE_PATH points), so Proton games accumulate
+# `.../compatdata/<appid>/pfx/drive_c/users/<user>/AppData/Local/dxvk/`.
+# The old path was `compatibilitytools.d/<tool>/*.dxvk-cache`: that directory
+# only holds the Proton build itself, so the option never matched anything.
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "~/.local/share/Steam/steamapps/compatdata/*/pfx/drive_c/users/*/AppData/Local/dxvk/*.dxvk-cache"
+type = "f"
+os = "linux"
+
+# Native (non-Proton) Wine/DXVK: the fallback cache directory on Linux.
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "~/.cache/dxvk/*.dxvk-cache"
+type = "f"
+os = "linux"

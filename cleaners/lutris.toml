@@ -1,0 +1,35 @@
+id = "lutris"
+name = "Lutris"
+description = "Open-source game manager logs and cache (installed games are never touched)"
+os = "linux"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Run and install logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.local/share/lutris/logs"
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "Downloaded cover/banner cache (re-downloaded)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.cache/lutris"
+
+[[option]]
+id = "runners"
+label = "Runners"
+description = "Downloaded Wine/emu runners (can take gigabytes; Lutris re-downloads them when needed)"
+warning = "Games cannot start without a runner; Lutris re-downloads it on first launch (large download)."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.local/share/lutris/runners"

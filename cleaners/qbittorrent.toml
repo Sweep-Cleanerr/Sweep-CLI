@@ -1,0 +1,28 @@
+id = "qbittorrent"
+name = "qBittorrent"
+description = "Torrent client logs (the torrent list and downloaded files are kept)"
+
+[[var]]
+name = "qbit_data"
+[[var.value]]
+os = "linux"
+search = "literal"
+value = "~/.local/share/qBittorrent"
+[[var.value]]
+os = "macos"
+search = "literal"
+value = "~/Library/Application Support/qBittorrent"
+[[var.value]]
+os = "windows"
+search = "literal"
+value = '$LOCALAPPDATA\qBittorrent'
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Client logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$qbit_data$$/logs"

@@ -1,0 +1,34 @@
+id = "dnf"
+name = "DNF"
+description = "Fedora / RHEL package manager cache"
+os = "linux"
+
+[[option]]
+id = "cache"
+label = "Package cache"
+description = "dnf clean all: remove cached packages and metadata"
+
+[[option.action]]
+command = "dnf.clean"
+search = "file"
+path = ""
+
+[[option]]
+id = "yum"
+label = "YUM compatibility"
+description = "yum clean all (for systems using the yum compatibility layer)"
+
+[[option.action]]
+command = "yum.clean"
+search = "file"
+path = ""
+
+[[option]]
+id = "deep_cache"
+label = "Deep cache sweep"
+description = "Per-file size preview of /var/cache/dnf and /var/cache/yum, then clean all"
+
+[[option.action]]
+command = "system.dnf_cache"
+search = "file"
+path = ""

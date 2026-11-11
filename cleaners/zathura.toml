@@ -1,0 +1,19 @@
+id = "zathura"
+name = "zathura"
+description = "zathura PDF viewer: cache data (your documents and reading position are kept)"
+os = "unix"
+
+[[running]]
+type = "exe"
+value = "zathura"
+os = "unix"
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "Delete zathura's rendering cache (rebuilt on demand)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.cache/zathura"

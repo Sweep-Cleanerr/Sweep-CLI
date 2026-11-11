@@ -1,0 +1,43 @@
+id = "linux_docker"
+name = "Docker"
+description = "Dangling images, build cache and stopped-container logs (running containers and volumes are never touched)"
+os = "linux"
+
+[[var]]
+name = "podman_cache"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.local/share/containers/cache"
+
+[[option]]
+id = "prune"
+label = "Dangling images and logs"
+description = "Runs docker image prune and truncates stopped-container logs; build cache is not included"
+warning = "Container logs are reset. Running containers and volumes are kept."
+
+[[option.action]]
+command = "system.docker"
+search = "file"
+path = ""
+
+[[option]]
+id = "podman_cache"
+label = "Podman build cache"
+description = "Clears the Podman layer cache (images are re-pulled, volumes are kept)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$podman_cache$$"
+
+[[option]]
+id = "volumes"
+label = "Unused volumes"
+description = "Deletes volumes no container references (docker volume prune)"
+warning = "Only volumes no container uses are removed; named and bind-mounted data volumes are kept."
+
+[[option.action]]
+command = "system.docker_volumes"
+search = "file"
+path = ""

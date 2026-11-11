@@ -1,0 +1,100 @@
+id = "haskell"
+name = "Haskell (cabal / stack)"
+description = "Downloaded package tarballs and package indexes (re-fetched by cabal or stack; installed toolchains are kept)"
+
+[[var]]
+name = "cabal_packages"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.cabal/packages"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\cabal\packages'
+
+[[var]]
+name = "cabal_cache"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.cache/cabal/packages"
+
+[[var]]
+name = "stack_pantry"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.stack/pantry"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\stack\pantry'
+
+[[var]]
+name = "ghcup_cache"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.ghcup/cache"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\ghcup\cache'
+
+[[var]]
+name = "ghcup_tmp"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.ghcup/tmp"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\ghcup\tmp'   # doğrula
+
+[[option]]
+id = "cabal_packages"
+label = "Cabal package cache"
+description = "Delete the downloaded Hackage tarballs and the local package index"
+warning = "The next build re-downloads and re-indexes the packages it needs."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$cabal_packages$$"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$cabal_cache$$"
+
+[[option]]
+id = "stack_pantry"
+label = "Stack Pantry index"
+description = "Delete Stack's cached Hackage snapshot metadata (refetched by stack update)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$stack_pantry$$"
+
+[[option]]
+id = "ghcup_cache"
+label = "GHCup downloads"
+description = "Delete downloaded GHC/Cabal bindists (re-downloaded by ghcup)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$ghcup_cache$$"
+
+[[option]]
+id = "ghcup_tmp"
+label = "GHCup temporary files"
+description = "Delete GHCup's temporary extraction files"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$ghcup_tmp$$"

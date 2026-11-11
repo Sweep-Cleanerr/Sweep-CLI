@@ -1,0 +1,14 @@
+id = "linux_flatpak"
+name = "Flatpak"
+description = "Unused Flatpak runtimes and leftover directories"
+os = "linux"
+
+[[option]]
+id = "unused"
+label = "Unused runtimes"
+description = "Runs flatpak uninstall --unused and sweeps .removed/appstream leftovers"
+
+[[option.action]]
+command = "system.flatpak"
+search = "file"
+path = ""

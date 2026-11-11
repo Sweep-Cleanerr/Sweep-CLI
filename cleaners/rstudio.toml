@@ -1,0 +1,59 @@
+id = "rstudio"
+name = "RStudio"
+description = "RStudio: session cache and logs (projects and scripts are kept)"
+
+[[running]]
+type = "exe"
+value = "rstudio"
+
+[[var]]
+name = "cache"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.cache/rstudio"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Caches/RStudio"
+
+# RStudio's internal state directory. Posit documents it as
+#   Linux/macOS ~/.local/share/rstudio
+#   Windows     %LOCALAPPDATA%\RStudio
+# and it holds the log directory. (%APPDATA%\RStudio is only the preferences
+# file, and ~/Library/Application Support/RStudio does not exist on macOS.)
+[[var]]
+name = "state"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.local/share/rstudio"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\RStudio'
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "Delete RStudio's cache and session data (rebuilt on the next start)"
+# No cache directory is documented for Windows (only the state directory), and
+# deleting %LOCALAPPDATA%\RStudio would take the open-document and session data
+# with it, so the option is limited to the platforms with a real cache dir.
+os = "unix"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$cache$$"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Delete RStudio log files"
+
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "$$state$$/**/*.log*"
+type = "f"

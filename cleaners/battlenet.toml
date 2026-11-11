@@ -1,0 +1,61 @@
+id = "battlenet"
+name = "Battle.net"
+description = "Blizzard game launcher logs and cache (Windows and macOS clients)"
+
+[[running]]
+type = "exe"
+value = "Battle.net.exe"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "Agent.exe"   # doğrula: arka plan ajanı
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "Battle.net"
+os = "macos"
+
+[[var]]
+name = "battlenet_data"
+[[var.value]]
+os = "macos"
+search = "literal"
+value = "~/Library/Application Support/Battle.net"   # doğrula
+[[var.value]]
+os = "windows"
+search = "literal"
+value = '$PROGRAMDATA\Battle.net'
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Launcher and game logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$battlenet_data$$/Logs"
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "UI and store cache"
+warning = "Close Battle.net first. The cache is rebuilt the next time it starts."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$battlenet_data$$/Cache"
+
+[[option]]
+id = "updates"
+label = "Pending updates"
+description = "Delete downloaded launcher and client update packages"
+warning = "Partly downloaded updates will be fetched again."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$battlenet_data$$/Updates"

@@ -1,0 +1,15 @@
+id = "linux_temp"
+name = "Temporary files"
+description = "Files older than 1 day in /tmp and /var/tmp (X11/systemd sockets are kept)"
+os = "linux"
+
+[[option]]
+id = "stale"
+label = "Stale temporary files"
+description = "Deletes temporary files older than 1 day; critical roots and sockets are skipped"
+warning = "/var/tmp is meant to survive reboots; running applications may lose temp files they still use."
+
+[[option.action]]
+command = "system.temp_deep"
+search = "file"
+path = ""

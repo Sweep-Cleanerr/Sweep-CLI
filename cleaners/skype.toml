@@ -1,0 +1,95 @@
+id = "skype"
+name = "Skype"
+description = "Skype client: cache, logs and crash dumps (login and chat history are kept)"
+
+[[running]]
+type = "exe"
+value = "skypeforlinux"
+os = "unix"
+
+[[running]]
+type = "exe"
+value = "Skype.exe"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "Skype"
+os = "macos"
+
+[[var]]
+name = "config"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.config/skypeforlinux"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Application Support/Microsoft/Skype for Desktop"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\Microsoft\Skype for Desktop'
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "Delete the client, GPU and code caches"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$config$$/Cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$config$$/Code Cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$config$$/GPUCache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$config$$/ShaderCache"
+
+# macOS keeps these outside Application Support, named after the bundle id.
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/Library/Caches/com.skype.skype"
+os = "macos"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Delete log files, media traces and crash dumps"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$config$$/logs"
+
+# Received-media cache. The old path was `$$data$$/media_messaging`, where
+# `$$data$$` was the glob `~/.config/skypeforlinux/*` - every subdirectory of
+# the profile - so the action expanded to `<subdir>/media_messaging` and never
+# matched the real directory, which sits directly in the profile.
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$config$$/media_messaging"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$config$$/Crashpad"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/Library/Logs/Skype"
+os = "macos"

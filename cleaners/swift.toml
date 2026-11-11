@@ -1,0 +1,29 @@
+id = "swift"
+name = "Swift Package Manager"
+description = "SwiftPM repository and manifest caches (re-fetched on the next resolve; source packages are kept)"
+
+[[var]]
+name = "spm_cache"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Caches/org.swift.swiftpm"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.cache/org.swift.swiftpm"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\org.swift.swiftpm'
+
+[[option]]
+id = "cache"
+label = "Package caches"
+description = "Delete cloned package repositories and the manifest cache"
+warning = "The next build resolves and clones the dependencies again."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$spm_cache$$"

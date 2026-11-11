@@ -1,0 +1,15 @@
+id = "linux_orphans"
+name = "Orphaned packages"
+description = "Auto-installed packages with no dependents (apt/dnf/pacman; root required)"
+os = "linux"
+
+[[option]]
+id = "autoremove"
+label = "Orphaned packages"
+description = "Listed with a dry run first; removed with the distro tool after confirmation"
+warning = "Removing packages cannot be undone. Review every package in the preview list."
+
+[[option.action]]
+command = "system.orphans"
+search = "file"
+path = ""

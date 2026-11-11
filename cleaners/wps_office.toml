@@ -1,0 +1,79 @@
+id = "wps_office"
+name = "WPS Office"
+description = "WPS Office: cache, temporary files and logs (your documents are kept)"
+
+[[running]]
+type = "exe"
+value = "wps"
+os = "linux"
+
+[[running]]
+type = "exe"
+value = "wpp"
+os = "linux"
+
+[[running]]
+type = "exe"
+value = "et"
+os = "linux"
+
+[[running]]
+type = "exe"
+value = "wps.exe"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "wpp.exe"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "et.exe"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "wpsoffice"
+os = "macos"
+
+[[var]]
+name = "config"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.local/share/Kingsoft"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Containers/com.kingsoft.wpsoffice.mac/Data/.kingsoft"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\Kingsoft'
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "Delete WPS Office's cache and temporary files"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$config$$/office6/cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$config$$/office6/temp"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Delete WPS Office log files"
+
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "$$config$$/office6/log/**/*.log*"
+type = "f"

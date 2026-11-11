@@ -1,0 +1,45 @@
+# Benchmark fixture config.
+#
+# Copy of the user's Sweep config, kept in-tree so `compare-bleachbit.ps1
+# -SweepConfig .\bench\sweep-config.toml` works in sandboxed sessions that
+# cannot read the user profile, and so repeated runs use identical settings.
+# The benchmark only runs preview commands; it never writes to this file.
+
+shred = false
+languages = ["en"]
+whitelist_files = []
+whitelist_folders = []
+custom_paths = []
+deepscan_roots = []
+deepscan_patterns = [
+    "*.log",
+    "*.log.*",
+    "*.tmp",
+    "*.temp",
+    "*.bak",
+    "*.old",
+    "*.~*",
+    "*~",
+    "*.swp",
+    "*.swo",
+    "*.orig",
+    "*.rej",
+    ".nfs*",
+    "*cache*",
+    "Thumbs.db",
+    ".DS_Store",
+]
+remember_last = false
+last_selection = []
+journal_size = "500M"
+journal_days = 7
+pacman_keep = 2
+temp_max_age_days = 1
+docker_build_cache = false
+hub_url = "https://raw.githubusercontent.com/sweep-cleaner/hub/main/index.toml"
+backup_dir = ""
+backup_max_size = "100M"
+log_file = ""
+trash_dir = ""
+git_guard = "warn"
+reserve_mb = 512

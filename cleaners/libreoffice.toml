@@ -1,0 +1,54 @@
+id = "libreoffice"
+name = "LibreOffice"
+description = "LibreOffice suite: cache"
+
+[[running]]
+type = "exe"
+value = "soffice"
+os = "unix"
+
+[[running]]
+type = "exe"
+value = "soffice.bin"
+os = "unix"
+
+# Windows'ta da asıl süreç `soffice.bin` (soffice.exe yalnızca başlatıcı);
+# `os = "unix"` Windows'u kapsamadığı için orada hiç kontrol yoktu.
+[[running]]
+type = "exe"
+value = "soffice.bin"
+os = "windows"
+
+[[var]]
+name = "user"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.config/libreoffice/*/user"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\LibreOffice\4\user'
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "Delete the LibreOffice cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$user$$/cache"
+
+# "Recent documents" seçeneği KALDIRILDI.
+#
+# Eski hâli `search = "walk.all"` ile `$$user$$/registrymodifications.xcu`
+# (bir DOSYA) hedefliyordu; `scan_paths` `min_depth(1)` ile yürüdüğü için kökün
+# kendisini asla döndürmez → seçenek sessizce hiçbir şey silmiyordu.
+#
+# `search = "file"` yapmak da doğru değil: o dosya LibreOffice'in TÜM kullanıcı
+# ayarlarını (araç çubukları, seçenekler, son belgeler) tutar, yani "son
+# belgeler" etiketiyle tüm profili silmek olurdu. Yalnızca PickList girdilerini
+# temizlemek XML düzenlemesi gerektiriyor ve bunun için bir provider yok.
+# Bu yüzden yanıltıcı seçenek kaldırıldı; profil sıfırlama isteniyorsa ayrı ve
+# açıkça uyarılı bir seçenek olarak eklenmeli.

@@ -1,0 +1,35 @@
+id = "pidgin"
+name = "Pidgin"
+description = "Multi-protocol chat logs (accounts are kept)"
+
+[[running]]
+type = "exe"
+value = "pidgin"
+os = "unix"
+
+[[running]]
+type = "exe"
+value = "pidgin.exe"
+os = "windows"
+
+[[var]]
+name = "purple"
+[[var.value]]
+value = "~/.purple"
+search = "literal"
+os = "linux"
+[[var.value]]
+value = "$APPDATA\\.purple"
+search = "literal"
+os = "windows"
+
+[[option]]
+id = "logs"
+label = "Chat logs"
+description = "Delete archived chat logs"
+warning = "Chat history is lost."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$purple$$/logs"

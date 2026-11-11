@@ -1,0 +1,36 @@
+id = "linux_gnome"
+name = "GNOME"
+description = "GNOME application caches, the Tracker index and the Zeitgeist activity log (dconf and extensions are kept)"
+os = "unix"
+
+[[option]]
+id = "app_cache"
+label = "Application caches"
+description = "Regenerable GNOME application caches; extensions and dconf are never touched"
+
+[[option.action]]
+command = "system.gnome_cache"
+search = "file"
+path = ""
+
+[[option]]
+id = "tracker"
+label = "Tracker dosya dizini"
+description = "Resets the file-search index with tracker3 reset (search is briefly slower)"
+warning = "After the Tracker index is reset, file search returns incomplete results for a while."
+
+[[option.action]]
+command = "system.tracker"
+search = "file"
+path = ""
+
+[[option]]
+id = "zeitgeist"
+label = "Zeitgeist activity"
+description = "Clears the application/document activity log (privacy)"
+warning = "Activity history is deleted; the recently-used list in GNOME Activities empties."
+
+[[option.action]]
+command = "system.zeitgeist"
+search = "file"
+path = ""

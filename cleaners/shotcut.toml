@@ -1,0 +1,44 @@
+id = "shotcut"
+name = "Shotcut"
+description = "Video editor logs (projects, presets and exports are kept)"
+
+[[running]]
+type = "exe"
+value = "shotcut"
+os = "unix"
+
+[[running]]
+type = "exe"
+value = "shotcut.exe"
+os = "windows"
+
+# Shotcut keeps its log next to its presets and cache (not next to the
+# settings file): `Settings.appDataLocation()` per the official FAQ.
+[[var]]
+name = "data"
+[[var.value]]
+value = "~/.local/share/Meltytech/Shotcut"
+search = "literal"
+os = "linux"
+[[var.value]]
+value = "~/Library/Application Support/Meltytech/Shotcut"
+search = "literal"
+os = "macos"
+[[var.value]]
+value = "$LOCALAPPDATA\\Meltytech\\Shotcut"
+search = "literal"
+os = "windows"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Delete log files older than 30 days"
+
+# The file is `shotcut-log.txt` (previous run kept as `shotcut-log.bak`);
+# the old `Shotcut*.log` pattern never matched it.
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "$$data$$/shotcut-log.*"
+max_age_days = 30
+type = "f"

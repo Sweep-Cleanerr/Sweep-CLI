@@ -1,0 +1,46 @@
+id = "elixir"
+name = "Elixir / Erlang"
+description = "Hex package tarballs and rebar3 caches (re-downloaded by mix; the Hex API key and installed archives are kept)"
+
+[[var]]
+name = "hex_packages"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.hex/packages"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$USERPROFILE\.hex\packages'
+
+[[var]]
+name = "rebar3_cache"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.cache/rebar3"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\rebar3'
+
+[[option]]
+id = "hex_packages"
+label = "Hex package cache"
+description = "Delete the downloaded Hex tarballs (kept in ~/.hex/packages)"
+warning = "mix re-downloads the packages it needs on the next deps.get."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$hex_packages$$"
+
+[[option]]
+id = "rebar3"
+label = "rebar3 cache"
+description = "Delete rebar3's downloaded plugins and Hex package cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$rebar3_cache$$"

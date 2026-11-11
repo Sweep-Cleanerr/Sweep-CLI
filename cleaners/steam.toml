@@ -1,0 +1,68 @@
+id = "steam"
+name = "Steam"
+description = "Game client logs, crash dumps and re-downloadable caches (game files are never touched)"
+
+[[running]]
+type = "exe"
+value = "steam"
+os = "unix"
+
+[[running]]
+type = "exe"
+value = "steam.exe"
+os = "windows"
+
+[[var]]
+name = "steam_data"
+[[var.value]]
+os = "linux"
+search = "literal"
+value = "~/.local/share/Steam"
+[[var.value]]
+os = "macos"
+search = "literal"
+value = "~/Library/Application Support/Steam"
+[[var.value]]
+os = "windows"
+search = "literal"
+value = '$PROGRAMFILES(X86)\Steam'
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Client and game run logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$steam_data$$/logs"
+
+[[option]]
+id = "dumps"
+label = "Crash dumps"
+description = "Crash dump files"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$steam_data$$/dumps"
+
+[[option]]
+id = "shadercache"
+label = "Shader cache"
+description = "Compiled shaders (Vulkan/OpenGL); rebuilt at game start-up, can hold gigabytes"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$steam_data$$/steamapps/shadercache"
+
+[[option]]
+id = "htmlcache"
+label = "UI cache"
+description = "Store/browser UI cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$steam_data$$/config/htmlcache"

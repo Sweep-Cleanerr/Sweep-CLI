@@ -1,0 +1,42 @@
+id = "spotify"
+name = "Spotify"
+description = "Music streaming cache (offline songs re-download, the session is kept)"
+
+[[running]]
+type = "exe"
+value = "spotify"
+os = "unix"
+
+[[running]]
+type = "exe"
+value = "Spotify.exe"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "Spotify"
+os = "macos"
+
+[[option]]
+id = "cache"
+label = "Streaming cache"
+description = "Cached songs; can hold gigabytes, re-streamed"
+warning = "Offline playlists must be re-downloaded."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.cache/spotify"
+os = "linux"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/Library/Caches/com.spotify.client"
+os = "macos"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = '$LOCALAPPDATA\Spotify\Storage'
+os = "windows"

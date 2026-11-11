@@ -1,0 +1,35 @@
+id = "linux_kde"
+name = "KDE Plasma"
+description = "Plasma shell/theme/icon caches, the Baloo index and the Akonadi file cache (config and KWallet are kept)"
+os = "unix"
+
+[[option]]
+id = "plasma_cache"
+label = "Plasma caches"
+description = "Regenerable Plasma, KWin, KRunner, KIO, sycoca and application caches"
+
+[[option.action]]
+command = "system.kde_cache"
+search = "file"
+path = ""
+
+[[option]]
+id = "baloo"
+label = "Baloo dosya dizini"
+description = "Clears the file-search index with balooctl purge (search is briefly slower, then rebuilt)"
+warning = "After the Baloo index is deleted, file search returns incomplete results for a while."
+
+[[option.action]]
+command = "system.baloo"
+search = "file"
+path = ""
+
+[[option]]
+id = "akonadi_cache"
+label = "Akonadi file cache"
+description = "KMail/Kontact file cache; the database is never touched. Close KMail before cleaning."
+
+[[option.action]]
+command = "system.kde_pim"
+search = "file"
+path = ""

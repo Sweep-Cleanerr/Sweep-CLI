@@ -1,0 +1,37 @@
+id = "openwebui"
+name = "Open WebUI"
+description = "Open WebUI server: cache and logs under the data dir (uploads, database and models are NEVER touched)"
+
+[[var]]
+name = "data"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.open-webui"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$USERPROFILE\\.open-webui'
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "Delete the server cache (uploads and database are kept)"
+
+# CACHE_DIR is `DATA_DIR/cache` (tiktoken/whisper downloads); there is no
+# separate `~/.cache/open-webui` directory.
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$data$$/cache"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Delete server log files"
+
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "$$data$$/*.log"
+type = "f"

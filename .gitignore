@@ -1,0 +1,10 @@
+/target/
+/bench/results/*
+!/bench/results/compare-bleachbit-20261110-202204.csv
+!/bench/results/compare-bleachbit-20261110-202204.md
+!/bench/results/compare-bleachbit-20261111-171004.csv
+!/bench/results/compare-bleachbit-20261111-171004.md
+!/bench/results/compare-bleachbit-20261111-173150.csv
+!/bench/results/compare-bleachbit-20261111-173150.md
+/bench/results-smoke/
+.workbuddy-ai/

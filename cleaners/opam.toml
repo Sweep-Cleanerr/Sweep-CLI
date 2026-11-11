@@ -1,0 +1,35 @@
+id = "opam"
+name = "OCaml (opam)"
+description = "opam download cache and logs (switches and installed packages are kept)"
+
+[[var]]
+name = "root"
+[[var.value]]
+os = "unix"
+search = "glob"
+value = "~/.opam"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\opam'
+
+[[option]]
+id = "download_cache"
+label = "Download cache"
+description = "Delete the cached source archives of installed packages"
+warning = "opam re-downloads a source archive only if it is ever re-installed."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$root$$/download-cache"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Delete per-switch opam logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$root$$/log"

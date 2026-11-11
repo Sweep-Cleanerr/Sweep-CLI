@@ -1,0 +1,59 @@
+id = "ms_office"
+name = "Microsoft Office"
+description = "Office document cache and recent-files shortcuts (documents themselves are never touched)"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "WINWORD.EXE"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "EXCEL.EXE"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "POWERPNT.EXE"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "OUTLOOK.EXE"
+os = "windows"
+
+[[var]]
+name = "office"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\Microsoft\Office\16.0'
+
+[[var]]
+name = "recent"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\Microsoft\Office\Recent'
+
+[[option]]
+id = "file_cache"
+label = "Document cache"
+description = "Delete Office's cached copies of SharePoint/OneDrive documents (OfficeFileCache)"
+warning = "Changes not yet uploaded to SharePoint/OneDrive may be lost. Check the Upload Center first."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$office$$/OfficeFileCache"
+
+[[option]]
+id = "recent"
+label = "Recent files shortcuts"
+description = "Delete the recent-document shortcuts (the list in the Office apps may still show entries stored in the registry)"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$recent$$"

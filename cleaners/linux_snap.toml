@@ -1,0 +1,29 @@
+id = "linux_snap"
+name = "Snap"
+description = "Disabled Snap revisions and the Snap download cache (root required)"
+os = "linux"
+
+[[option]]
+id = "revisions"
+label = "Disabled revisions"
+description = "Removes disabled revisions from snap list --all; current versions are never touched"
+
+[[option.action]]
+command = "system.snap"
+search = "file"
+path = ""
+
+[[option]]
+id = "cache"
+label = "Application caches"
+description = "Shared cache directories of Snap applications and the snapd download cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/snap/*/common/.cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.cache/snapd"

@@ -1,0 +1,70 @@
+id = "blender"
+name = "Blender"
+description = "3D editor cache and recent-files list (projects are kept)"
+
+[[running]]
+type = "exe"
+value = "blender"
+os = "linux"
+
+[[running]]
+type = "exe"
+value = "Blender"
+os = "macos"
+
+[[running]]
+type = "exe"
+value = "blender.exe"
+os = "windows"
+
+[[var]]
+name = "cache"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.cache/blender"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Caches/Blender"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$LOCALAPPDATA\Blender Foundation\Blender\Cache'   # doğrula
+
+[[var]]
+name = "config"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.config/blender"
+[[var.value]]
+os = "macos"
+search = "glob"
+value = "~/Library/Application Support/Blender"
+[[var.value]]
+os = "windows"
+search = "glob"
+value = '$APPDATA\Blender Foundation\Blender'
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "Thumbnail and build cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$cache$$"
+
+[[option]]
+id = "recent"
+label = "Recent files"
+description = "Clears the recent-files list (privacy)"
+warning = "The recent-files list is emptied. Close Blender first, otherwise it rewrites the list on exit."
+
+[[option.action]]
+command = "delete"
+search = "glob"
+path = "$$config$$/*/config/recent-files.txt"
+type = "f"

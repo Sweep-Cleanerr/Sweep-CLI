@@ -1,0 +1,24 @@
+id = "nextcloud"
+name = "Nextcloud"
+description = "Cloud client logs and cache (synced files and the account are kept)"
+os = "linux"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "Sync logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.config/Nextcloud/logs"
+
+[[option]]
+id = "cache"
+label = "Cache"
+description = "Thumbnail and discovery cache"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "~/.cache/Nextcloud"

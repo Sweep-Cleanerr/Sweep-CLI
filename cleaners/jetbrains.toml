@@ -1,0 +1,60 @@
+id = "jetbrains"
+name = "JetBrains IDE'leri"
+description = "IntelliJ, PyCharm, WebStorm and others: logs and indexes (projects are kept)"
+os = "linux"
+
+[[var]]
+name = "ide_cache"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.cache/JetBrains/*"
+
+[[var]]
+name = "android_cache"
+[[var.value]]
+os = "linux"
+search = "glob"
+value = "~/.cache/Google/AndroidStudio*"
+
+[[option]]
+id = "logs"
+label = "Logs"
+description = "IDE run-time logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$ide_cache$$/log"
+
+[[option]]
+id = "indices"
+label = "Index caches"
+description = "Code indexes; rebuilt on first start after deletion (can take minutes on large projects)"
+warning = "The next IDE start re-indexes the project and is slower."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$ide_cache$$/caches"
+
+[[option]]
+id = "android_logs"
+label = "Android Studio logs"
+description = "Android Studio run-time logs"
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$android_cache$$/log"
+
+[[option]]
+id = "android_indices"
+label = "Android Studio dizinleri"
+description = "Android Studio code indexes; rebuilt on first start"
+warning = "The next start is slower."
+
+[[option.action]]
+command = "delete"
+search = "walk.all"
+path = "$$android_cache$$/caches"
