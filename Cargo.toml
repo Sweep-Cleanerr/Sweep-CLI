@@ -6,6 +6,7 @@ rust-version = "1.88"
 description = "Fast, preview-first system cleaner with a scriptable CLI"
 license = "GPL-3.0-or-later"
 readme = "README.md"
+repository = "https://github.com/Sweep-Cleanerr/Sweep-CLI"
 keywords = ["cleaner", "disk", "cache", "cli", "system"]
 categories = ["command-line-utilities", "filesystem"]
 build = "build.rs"
