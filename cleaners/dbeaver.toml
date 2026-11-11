@@ -6,6 +6,11 @@ description = "DBeaver database client: workspace logs, metadata and cache (conn
 type = "exe"
 value = "dbeaver"
 
+[[running]]
+type = "exe"
+value = "dbeaver.exe"
+os = "windows"
+
 [[var]]
 name = "data"
 [[var.value]]

@@ -4,7 +4,7 @@ description = "GOG game launcher logs and cache"
 
 [[running]]
 type = "exe"
-value = "GOGGalaxy"
+value = "GalaxyClient.exe"
 os = "windows"
 
 [[running]]

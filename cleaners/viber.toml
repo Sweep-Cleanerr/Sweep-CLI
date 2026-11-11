@@ -6,6 +6,11 @@ description = "Viber: cache, logs and crash reports (your messages and media are
 type = "exe"
 value = "viber"
 
+[[running]]
+type = "exe"
+value = "Viber.exe"
+os = "windows"
+
 [[var]]
 name = "data"
 [[var.value]]

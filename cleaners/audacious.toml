@@ -6,6 +6,11 @@ description = "Audacious music player: playlist cache and logs (your music files
 type = "exe"
 value = "audacious"
 
+[[running]]
+type = "exe"
+value = "audacious.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

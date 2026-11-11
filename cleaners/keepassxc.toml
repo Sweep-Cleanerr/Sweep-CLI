@@ -6,6 +6,11 @@ description = "KeePassXC: browser-integration and icon caches (your password dat
 type = "exe"
 value = "keepassxc"
 
+[[running]]
+type = "exe"
+value = "KeePassXC.exe"
+os = "windows"
+
 [[var]]
 name = "cache"
 [[var.value]]

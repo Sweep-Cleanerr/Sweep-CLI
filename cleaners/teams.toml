@@ -14,7 +14,7 @@ os = "unix"
 
 [[running]]
 type = "exe"
-value = "ms-teams"
+value = "ms-teams.exe"
 os = "windows"
 
 [[running]]

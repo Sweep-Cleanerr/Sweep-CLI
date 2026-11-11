@@ -6,6 +6,11 @@ description = "OpenShot video editor: preview cache and logs (your projects and 
 type = "exe"
 value = "openshot-qt"
 
+[[running]]
+type = "exe"
+value = "openshot-qt.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

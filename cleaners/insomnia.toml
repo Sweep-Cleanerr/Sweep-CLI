@@ -6,6 +6,11 @@ description = "Insomnia API client: cache, logs and crash reports (your collecti
 type = "exe"
 value = "insomnia"
 
+[[running]]
+type = "exe"
+value = "Insomnia.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

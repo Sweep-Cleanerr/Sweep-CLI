@@ -6,6 +6,11 @@ description = "DeaDBeeF music player: cover-art and media cache plus logs (your 
 type = "exe"
 value = "deadbeef"
 
+[[running]]
+type = "exe"
+value = "deadbeef.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

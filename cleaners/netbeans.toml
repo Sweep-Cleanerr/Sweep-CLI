@@ -6,6 +6,16 @@ description = "Apache NetBeans IDE: index caches and logs (projects are kept)"
 type = "exe"
 value = "netbeans"
 
+[[running]]
+type = "exe"
+value = "netbeans64.exe"
+os = "windows"
+
+[[running]]
+type = "exe"
+value = "netbeans.exe"
+os = "windows"
+
 [[var]]
 name = "cache"
 [[var.value]]

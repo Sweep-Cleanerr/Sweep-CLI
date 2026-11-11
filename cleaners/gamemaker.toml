@@ -4,7 +4,7 @@ description = "GameMaker Studio cache and temp files (projects are kept)"
 
 [[running]]
 type = "exe"
-value = "GameMaker"
+value = "GameMaker.exe"
 os = "windows"
 
 [[var]]

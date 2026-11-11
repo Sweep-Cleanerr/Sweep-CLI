@@ -6,6 +6,11 @@ description = "Gnumeric spreadsheet: cache and logs (your spreadsheets are kept)
 type = "exe"
 value = "gnumeric"
 
+[[running]]
+type = "exe"
+value = "gnumeric.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

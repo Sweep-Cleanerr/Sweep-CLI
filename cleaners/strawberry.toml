@@ -6,6 +6,11 @@ description = "Strawberry music player: cover-art and stream cache plus logs (li
 type = "exe"
 value = "strawberry"
 
+[[running]]
+type = "exe"
+value = "strawberry.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

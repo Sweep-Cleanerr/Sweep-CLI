@@ -43,7 +43,6 @@ path = "$$prefix$$/drive_c/windows/temp"
 command = "delete"
 search = "glob"
 path = "$$prefix$$/drive_c/users/*/Temp/*"
-max_depth = 3
 
 [[option]]
 id = "cache"

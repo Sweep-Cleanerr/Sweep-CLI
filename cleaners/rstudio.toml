@@ -6,6 +6,11 @@ description = "RStudio: session cache and logs (projects and scripts are kept)"
 type = "exe"
 value = "rstudio"
 
+[[running]]
+type = "exe"
+value = "rstudio.exe"
+os = "windows"
+
 [[var]]
 name = "cache"
 [[var.value]]

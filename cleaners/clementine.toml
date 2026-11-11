@@ -6,6 +6,11 @@ description = "Clementine music player: stream and cover-art cache plus logs (li
 type = "exe"
 value = "clementine"
 
+[[running]]
+type = "exe"
+value = "clementine.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

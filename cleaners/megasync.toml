@@ -6,6 +6,11 @@ description = "MEGAsync client: cache, logs and crash dumps (your synced files a
 type = "exe"
 value = "megasync"
 
+[[running]]
+type = "exe"
+value = "MEGAsync.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

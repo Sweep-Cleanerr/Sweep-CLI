@@ -6,6 +6,11 @@ description = "FileZilla FTP client: logs and cache (sites and the transfer queu
 type = "exe"
 value = "filezilla"
 
+[[running]]
+type = "exe"
+value = "filezilla.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

@@ -6,6 +6,11 @@ description = "AbiWord word processor: cache and logs (your documents are kept)"
 type = "exe"
 value = "abiword"
 
+[[running]]
+type = "exe"
+value = "AbiWord.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

@@ -6,6 +6,11 @@ description = "Syncthing: logs and the local index database (your synced folders
 type = "exe"
 value = "syncthing"
 
+[[running]]
+type = "exe"
+value = "syncthing.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

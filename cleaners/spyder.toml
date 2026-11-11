@@ -6,6 +6,11 @@ description = "Spyder Python IDE: caches and logs (settings and scripts are kept
 type = "exe"
 value = "spyder"
 
+[[running]]
+type = "exe"
+value = "spyder.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

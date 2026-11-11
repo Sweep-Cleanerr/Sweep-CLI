@@ -6,6 +6,11 @@ description = "nomacs image viewer: thumbnail cache and logs (your photos are ne
 type = "exe"
 value = "nomacs"
 
+[[running]]
+type = "exe"
+value = "nomacs.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

@@ -37,7 +37,6 @@ description = "Delete abandoned session temp directories (only when Audacity is 
 command = "delete"
 search = "glob"
 path = "/tmp/audacity-*"
-max_depth = 2
 os = "linux"
 
 [[option]]

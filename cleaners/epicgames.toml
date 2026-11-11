@@ -4,7 +4,7 @@ description = "Epic Games Store launcher logs and cache"
 
 [[running]]
 type = "exe"
-value = "EpicGamesLauncher"
+value = "EpicGamesLauncher.exe"
 os = "windows"
 
 [[running]]

@@ -6,6 +6,11 @@ description = "ONLYOFFICE Desktop Editors: cache, logs and crash reports (your d
 type = "exe"
 value = "desktopeditors"
 
+[[running]]
+type = "exe"
+value = "DesktopEditors.exe"
+os = "windows"
+
 [[var]]
 name = "config"
 [[var.value]]

@@ -6,6 +6,11 @@ description = "qutebrowser: web cache, history database and logs (settings and s
 type = "exe"
 value = "qutebrowser"
 
+[[running]]
+type = "exe"
+value = "qutebrowser.exe"
+os = "windows"
+
 [[var]]
 name = "data"
 [[var.value]]

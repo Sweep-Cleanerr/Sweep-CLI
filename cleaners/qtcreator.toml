@@ -6,6 +6,11 @@ description = "Qt Creator IDE: build, QML and help caches plus logs (projects ar
 type = "exe"
 value = "qtcreator"
 
+[[running]]
+type = "exe"
+value = "qtcreator.exe"
+os = "windows"
+
 [[var]]
 name = "cache"
 [[var.value]]

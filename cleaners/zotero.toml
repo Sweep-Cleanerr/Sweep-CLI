@@ -57,28 +57,24 @@ command = "delete"
 search = "glob"
 path = "$$cache$$/**/cache2"
 type = "d"
-max_depth = 4
 
 [[option.action]]
 command = "delete"
 search = "glob"
 path = "$$cache$$/**/startupCache"
 type = "d"
-max_depth = 4
 
 [[option.action]]
 command = "delete"
 search = "glob"
 path = "$$data$$/**/cache2"
 type = "d"
-max_depth = 4
 
 [[option.action]]
 command = "delete"
 search = "glob"
 path = "$$data$$/**/startupCache"
 type = "d"
-max_depth = 4
 
 [[option]]
 id = "logs"
@@ -90,18 +86,15 @@ command = "delete"
 search = "glob"
 path = "$$data$$/**/*.log*"
 type = "f"
-max_depth = 5
 
 [[option.action]]
 command = "delete"
 search = "glob"
 path = "$$data$$/**/crashes"
 type = "d"
-max_depth = 4
 
 [[option.action]]
 command = "delete"
 search = "glob"
 path = "$$data$$/**/Crash Reports"
 type = "d"
-max_depth = 3
