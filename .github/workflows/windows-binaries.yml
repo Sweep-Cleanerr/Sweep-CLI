@@ -1,0 +1,46 @@
+name: Windows binaries
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag
+        required: true
+        default: v0.6.0
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.88
+        with:
+          targets: x86_64-pc-windows-msvc,aarch64-pc-windows-msvc
+      - name: Build portable binaries
+        shell: pwsh
+        env:
+          RUSTFLAGS: -C target-feature=+crt-static
+        run: |
+          $ErrorActionPreference = "Stop"
+          foreach ($target in @("x86_64-pc-windows-msvc", "aarch64-pc-windows-msvc")) {
+            cargo build --release --target $target
+            $arch = $target.Split("-")[0]
+            $stage = "stage-$arch"
+            New-Item -ItemType Directory -Force $stage | Out-Null
+            Copy-Item "target/$target/release/sweep.exe" "$stage/sweep.exe"
+            Copy-Item README.md, LICENSE $stage
+            Compress-Archive -Path "$stage/*" -DestinationPath "sweep-v0.6.0-$arch-pc-windows-msvc-portable.zip"
+          }
+      - name: Attach to release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          gh release upload $env:TAG `
+            sweep-v0.6.0-x86_64-pc-windows-msvc-portable.zip `
+            sweep-v0.6.0-aarch64-pc-windows-msvc-portable.zip `
+            --clobber

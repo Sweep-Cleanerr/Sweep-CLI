@@ -1,4 +1,5 @@
 /target/
+/dist/
 /bench/results/*
 !/bench/results/compare-bleachbit-20261110-202204.csv
 !/bench/results/compare-bleachbit-20261110-202204.md
