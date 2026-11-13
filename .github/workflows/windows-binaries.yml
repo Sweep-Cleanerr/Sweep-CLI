@@ -6,7 +6,7 @@ on:
       tag:
         description: Existing release tag
         required: true
-        default: v0.6.0
+        default: v0.6.1
 
 permissions:
   contents: write
@@ -23,16 +23,19 @@ jobs:
         shell: pwsh
         env:
           RUSTFLAGS: -C target-feature=+crt-static
+          TAG: ${{ inputs.tag }}
         run: |
           $ErrorActionPreference = "Stop"
+          $version = $env:TAG.TrimStart("v")
           foreach ($target in @("x86_64-pc-windows-msvc", "aarch64-pc-windows-msvc")) {
             cargo build --release --target $target
             $arch = $target.Split("-")[0]
             $stage = "stage-$arch"
             New-Item -ItemType Directory -Force $stage | Out-Null
             Copy-Item "target/$target/release/sweep.exe" "$stage/sweep.exe"
-            Copy-Item README.md, LICENSE $stage
-            Compress-Archive -Path "$stage/*" -DestinationPath "sweep-v0.6.0-$arch-pc-windows-msvc-portable.zip"
+            Copy-Item LICENSE $stage
+            Compress-Archive -Path "$stage/*" -DestinationPath "sweep-v$version-$arch-pc-windows-msvc-portable.zip"
+            Copy-Item "target/$target/release/sweep.exe" "sweep-v$version-$arch-pc-windows-msvc.exe"
           }
       - name: Attach to release
         shell: pwsh
@@ -40,7 +43,15 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ inputs.tag }}
         run: |
-          gh release upload $env:TAG `
-            sweep-v0.6.0-x86_64-pc-windows-msvc-portable.zip `
-            sweep-v0.6.0-aarch64-pc-windows-msvc-portable.zip `
-            --clobber
+          $ErrorActionPreference = "Stop"
+          $version = $env:TAG.TrimStart("v")
+          $files = @(
+            "sweep-v$version-x86_64-pc-windows-msvc-portable.zip",
+            "sweep-v$version-x86_64-pc-windows-msvc.exe",
+            "sweep-v$version-aarch64-pc-windows-msvc-portable.zip",
+            "sweep-v$version-aarch64-pc-windows-msvc.exe"
+          )
+          foreach ($file in $files) {
+            if (!(Test-Path $file)) { throw "missing $file" }
+            gh release upload $env:TAG $file --clobber
+          }
