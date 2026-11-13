@@ -58,6 +58,30 @@ cargo build --release
 
 On Windows the binary is `.\target\release\sweep.exe`.
 
+### Windows binaries
+
+Portable, single-file builds are published on the
+[v0.6.0 release](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/tag/v0.6.0).
+There is no installer: download, unzip if needed, and run `sweep.exe`.
+
+| Architecture | Build | Download |
+| --- | --- | --- |
+| x64 | MSVC (recommended) | [zip](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.0/sweep-v0.6.0-x86_64-pc-windows-msvc-portable.zip) · [exe](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.0/sweep-v0.6.0-x86_64-pc-windows-msvc.exe) |
+| x64 | GNU | [zip](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.0/sweep-v0.6.0-x86_64-pc-windows-gnu-portable.zip) · [exe](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.0/sweep-v0.6.0-x86_64-pc-windows-gnu.exe) |
+| ARM64 | MSVC | [zip](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.0/sweep-v0.6.0-aarch64-pc-windows-msvc-portable.zip) · [exe](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.0/sweep-v0.6.0-aarch64-pc-windows-msvc.exe) |
+
+The builds are unsigned; Windows SmartScreen may ask for confirmation on first
+run. Verify the download with the SHA-256 checksums below if needed.
+
+```text
+sweep-v0.6.0-x86_64-pc-windows-msvc-portable.zip   5e7fabe2c4eb3b61fd0ebeb57e906a1ea366556dafbd9c8bd2720954a1a5f715
+sweep-v0.6.0-x86_64-pc-windows-msvc.exe            5ccc460fd778a5431f3ebcfef7248f9e081985c10d7a81defc9ed0695ad9620b
+sweep-v0.6.0-x86_64-pc-windows-gnu-portable.zip    68c37730035c6852bf2101fdf1d7d7cb5bd73ad467446b582d073dae1ab21cee
+sweep-v0.6.0-x86_64-pc-windows-gnu.exe             87fae365dadf168e50ed5c1b4aca30b077f1ea7e86f9180ff4ebc09346a18b87
+sweep-v0.6.0-aarch64-pc-windows-msvc-portable.zip  272b3cba21999c64070bfdfd57851f602ec77f7bba0f08972aa2342968300ce0
+sweep-v0.6.0-aarch64-pc-windows-msvc.exe           ac06e589961eee2971aa818578d6dfa2fa2c73472f02bcb8730109f1e41c12e9
+```
+
 ```sh
 # List available cleaners
 sweep list
