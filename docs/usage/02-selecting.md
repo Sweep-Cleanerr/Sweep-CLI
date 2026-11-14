@@ -24,8 +24,8 @@ an empty selection is `nothing selected`.
 `list --os windows` shows only cleaners whose `os` filter matches
 the target. At run time, actions whose `os` doesn't match the host
 are skipped before execution. `list --running` shows only cleaners
-whose `running.path` check currently matches (process-name checks
-are deferred).
+whose `running` check currently matches: either a `running.path`
+pattern exists or a `running.exe` process is running.
 
 ## Definitions
 
@@ -34,9 +34,9 @@ are deferred).
   filtering.
 - Drop-in: `--define DIR` (repeatable) loads `.toml` files from
   `DIR`. The same files work with `import`.
-- BleachBit format and `winapp2.ini` loaders are flags
-  (`--bleachbit`, `--winapp2`) but report "not implemented yet" —
-  only native TOML loads today.
+- `--bleachbit` and `--winapp2` auto-load BleachBit definitions and
+  `winapp2.ini` from their standard locations, converting them to the
+  native cleaner model.
 - Trust: external definitions lose `process` / `winreg` /
   `apt.autoremove` unless `--trust-external` is passed. Unknown
   commands fail closed in `validate_action`.
