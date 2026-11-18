@@ -74,12 +74,12 @@ The builds are unsigned; Windows SmartScreen may ask for confirmation on first
 run. Verify the download with the SHA-256 checksums below if needed.
 
 ```text
-sweep-v0.6.2-x86_64-pc-windows-msvc-portable.zip   4c1b8c36448a3b7248ebba50db29e35e48ff7dc68929cf67f6a711ce7f571489
-sweep-v0.6.2-x86_64-pc-windows-msvc.exe            857a3a608dec05f2db69a1520ac682354ed78d1785f6b95680ff267447717a85
+sweep-v0.6.2-x86_64-pc-windows-msvc-portable.zip   f312e1aee04fbd12ba2402ad9f014249634d810e718b9a7012bf0fb712426c97
+sweep-v0.6.2-x86_64-pc-windows-msvc.exe            f3fbd093b3008920cb0312e1039f64d1db3d5eef459b5ce34d29c27dec883aed
 sweep-v0.6.2-x86_64-pc-windows-gnu-portable.zip    c0e473574ec7271950b2024720db87ce63111707da4f8cee0d4349bec834ba7f
 sweep-v0.6.2-x86_64-pc-windows-gnu.exe             1cff948b747858e992a340704dcf82bd311506eab31498b5ad061b249740ffd8
-sweep-v0.6.2-aarch64-pc-windows-msvc-portable.zip  83d34ba799fd20ab595c022590d87581a32236562a50485972e86066b332e878
-sweep-v0.6.2-aarch64-pc-windows-msvc.exe           97a92bcb4b0cfab6d8989b154fc31b405dc594f4a31b8edc58b9936c2ca4d2f8
+sweep-v0.6.2-aarch64-pc-windows-msvc-portable.zip  15ff185ec613989d171cf106248870ac7add69f1f61157f080461c73b0465962
+sweep-v0.6.2-aarch64-pc-windows-msvc.exe           8c50b8da10d302caf53555c1d902beddc1566426244d93031516983bd134e140
 ```
 
 ```sh
