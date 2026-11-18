@@ -10,7 +10,7 @@ would remove. `clean` performs the deletions after an explicit `--yes`.
 The binary and library share the same engine. Every command is
 scriptable, and `--json` emits one report document on stdout.
 
-Status: **240 tests passing** (`cargo test --all-targets`).
+Status: **245 tests passing** (`cargo test --all-targets`).
 
 ## Safety model
 

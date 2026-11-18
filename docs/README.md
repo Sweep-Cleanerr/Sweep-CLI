@@ -7,6 +7,7 @@ single JSON document with `--json`.
 | Page | About |
 | --- | --- |
 | [overview.md](overview.md) | Project overview, architecture, and safety model. |
+| [file-map.md](file-map.md) | Contributor map: which file to open for a given change. |
 | [usage/README.md](usage/README.md) | Usage guide index. |
 | [usage/01-basic-workflow.md](usage/01-basic-workflow.md) | preview → clean → undo/purge, the `--yes` gate, backup vs trash. |
 | [usage/02-selecting.md](usage/02-selecting.md) | selectors, exclusions, platform filters, `--define`, `list` / `info` / `import`. |
