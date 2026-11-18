@@ -17,6 +17,7 @@ single JSON document with `--json`.
 | [BENCHMARKS.md](BENCHMARKS.md) | measured Sweep vs BleachBit preview results. |
 | [cleaner-format.md](cleaner-format.md) | the native TOML schema (authoritative for `src/definition/native.rs`). |
 | [compatibility.md](compatibility.md) | provider coverage, OS gates, what is not yet runtime-tested. |
+| [CHANGELOG.md](CHANGELOG.md) | release history. |
 
 Rules Sweep follows:
 
