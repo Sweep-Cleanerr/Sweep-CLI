@@ -140,6 +140,18 @@ fn process(
         metadata.file_type().is_symlink() || crate::platform::is_reparse_point_metadata(&metadata);
     let follow_links = matches!(def.search, SearchKind::File);
 
+    // A leaf link's canonical target can sit outside a protected parent, so
+    // check the parent too. Root-level links are verified, not rejected.
+    if is_link {
+        if let Some(parent) = path.parent() {
+            let root_level = parent.parent().is_some_and(|root| root.parent().is_none());
+            if let Err(error) = ctx.guard.check(parent, root_level) {
+                report.block(cleaner, option, error.to_string());
+                return;
+            }
+        }
+    }
+
     // Links keep their own guard check; regular paths get the same guard plus
     // the critical-tree checks inside safety::check_path.
     if is_link {
@@ -589,5 +601,30 @@ mod tests {
         assert!(exact.entries.is_empty());
         assert!(!exact.blocked.is_empty());
         assert!(crate::action::safety::check_path(&link, &ctx).is_err());
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn file_search_keeps_a_link_inside_a_protected_parent() {
+        use crate::core::keep::{Guard, KeepList};
+
+        let root = crate::fixture("action_file_link_parent");
+        let protected = root.join("protected");
+        let safe = root.join("safe");
+        std::fs::create_dir_all(&protected).unwrap();
+        std::fs::create_dir_all(&safe).unwrap();
+        let link = protected.join("shortcut");
+        if !crate::junction(&safe, &link) {
+            return;
+        }
+
+        let mut keep = KeepList::new();
+        keep.add_literal_folder(&protected);
+        let mut ctx = RunContext::clean();
+        ctx.guard = Guard::new(keep);
+
+        let report = report_for(&action(&link, SearchKind::File), &ctx);
+        assert!(!report.blocked.is_empty(), "{report:?}");
+        assert!(link.symlink_metadata().is_ok());
     }
 }

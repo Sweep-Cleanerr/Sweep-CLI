@@ -550,8 +550,9 @@ impl Guard {
         }
         let leaf_is_link = leaf == LinkState::Link;
         let ancestor_link = self.ancestor_has_link(normalized);
+        let root_link = self.root_level_has_link(normalized);
 
-        if ancestor_link || (follow_links && leaf_is_link) {
+        if ancestor_link || root_link || (follow_links && leaf_is_link) {
             match canonical_lenient(normalized) {
                 Ok(real) => {
                     let real = strip_verbatim(&real);
@@ -573,14 +574,32 @@ impl Guard {
     fn ancestor_has_link(&self, path: &Path) -> bool {
         let mut current = path.parent();
         while let Some(dir) = current {
-            // Links directly below the filesystem root (/tmp -> /private/tmp,
-            // /lib -> usr/lib, ...) are operating-system layout, not an
-            // attack surface; everything deeper is checked.
+            // Root-level links are OS layout (/tmp -> /private/tmp, ...).
+            // They are resolved by root_level_has_link, not rejected here.
             if dir.as_os_str().is_empty() || is_root_level(dir) {
                 break;
             }
             if self.cached_is_link(dir) {
                 return true;
+            }
+            current = dir.parent();
+        }
+        false
+    }
+
+    /// True when the directory directly below the filesystem root is a link.
+    ///
+    /// These stay exempt from the link rejection so OS layout keeps working,
+    /// but the resolved target is still checked: otherwise a root-level
+    /// junction could hide a protected tree behind an innocent-looking path.
+    fn root_level_has_link(&self, path: &Path) -> bool {
+        let mut current = path.parent();
+        while let Some(dir) = current {
+            if dir.as_os_str().is_empty() {
+                break;
+            }
+            if is_root_level(dir) {
+                return self.cached_is_link(dir);
             }
             current = dir.parent();
         }
@@ -598,11 +617,15 @@ impl Guard {
         }
 
         let linked = link_state(dir) != LinkState::NotLink;
-        if let Ok(mut cache) = self.ancestors.lock() {
-            if cache.len() >= ANCESTOR_CACHE_MAX {
-                cache.clear();
+        if linked {
+            // A negative probe goes stale the moment a directory is replaced
+            // by a junction; only positives are safe to reuse.
+            if let Ok(mut cache) = self.ancestors.lock() {
+                if cache.len() >= ANCESTOR_CACHE_MAX {
+                    cache.clear();
+                }
+                cache.insert(dir.to_path_buf(), (linked, now));
             }
-            cache.insert(dir.to_path_buf(), (linked, now));
         }
         linked
     }
@@ -967,5 +990,64 @@ mod tests {
         assert!(!is_link(&target));
 
         fs::remove_dir_all(&base).unwrap();
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn root_level_junction_cannot_hide_protected_subtree() {
+        let Some(home) = platform::home_dir() else { return; };
+        let target = home.join("Documents");
+        if !target.is_dir() {
+            return;
+        }
+        let Some(root) = home.ancestors().last() else { return; };
+        let link = root.join(format!("sweep-root-link-{}", std::process::id()));
+        if !crate::junction(&target, &link) {
+            return;
+        }
+
+        let through = link.join("Desktop");
+        let guard_verdict = Guard::default_guard().check(&through, false);
+        let ctx = crate::action::context::RunContext::clean();
+        let safety_verdict = crate::action::safety::check_path(&through, &ctx);
+
+        let _ = fs::remove_dir(&link);
+        assert!(guard_verdict.is_err(), "guard bypassed: {guard_verdict:?}");
+        assert!(safety_verdict.is_err(), "safety bypassed: {safety_verdict:?}");
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn trailing_dots_cannot_hide_a_kept_file() {
+        let root = crate::fixture("keep_trailing_dot");
+        let file = root.join("secret.txt");
+        fs::write(&file, b"x").unwrap();
+        let mut keep = KeepList::new();
+        keep.add_literal_file(&file);
+
+        let verdict = Guard::new(keep).check(&root.join("secret.txt."), false);
+        assert!(matches!(verdict, Err(Error::Aborted)), "{verdict:?}");
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn negative_link_probe_is_not_cached() {
+        let root = crate::fixture("keep_negative_link_cache");
+        let child = root.join("plain");
+        fs::create_dir_all(&child).unwrap();
+        let file = child.join("cache.tmp");
+        fs::write(&file, b"x").unwrap();
+
+        let guard = Guard::new(KeepList::new());
+        assert!(guard.check(&file, false).is_ok());
+
+        fs::remove_dir_all(&child).unwrap();
+        let target = root.join("target");
+        fs::create_dir_all(&target).unwrap();
+        if !crate::junction(&target, &child) {
+            return;
+        }
+        let verdict = guard.check(&file, false);
+        assert!(matches!(verdict, Err(Error::Link(_))), "{verdict:?}");
     }
 }

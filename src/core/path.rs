@@ -204,12 +204,41 @@ pub fn normalize(path: &Path) -> PathBuf {
 pub fn comparable(path: &Path) -> PathBuf {
     #[cfg(windows)]
     {
-        normalize(&extended_path_undo(path))
+        trim_windows_names(&normalize(&extended_path_undo(path)))
     }
     #[cfg(not(windows))]
     {
         normalize(path)
     }
+}
+
+/// Win32 strips trailing dots and spaces from each name. Comparisons must do
+/// the same, or `C:\dir.` slips past every check that guards `C:\dir`.
+/// Only the comparison form changes: `normalize` and `extended_path` must keep
+/// the caller's spelling so destructive calls still address the real target.
+#[cfg(windows)]
+fn trim_windows_names(path: &Path) -> PathBuf {
+    use std::ffi::OsString;
+
+    let mut out = PathBuf::new();
+    for component in path.components() {
+        let Component::Normal(name) = component else {
+            out.push(component.as_os_str());
+            continue;
+        };
+        let mut bytes = name.as_encoded_bytes().to_vec();
+        while matches!(bytes.last(), Some(b'.' | b' ')) {
+            bytes.pop();
+        }
+        if bytes.is_empty() {
+            out.push(name);
+        } else {
+            // SAFETY: only trailing ASCII bytes are removed from valid
+            // encoded bytes, so the result is still a valid encoding.
+            out.push(unsafe { OsString::from_encoded_bytes_unchecked(bytes) });
+        }
+    }
+    out
 }
 
 fn comparable_parts(path: &Path) -> impl Iterator<Item = Component<'_>> {
@@ -586,5 +615,18 @@ mod tests {
     #[test]
     fn relative_paths_are_not_extended() {
         assert_eq!(extended_path(Path::new(r"a\b")), PathBuf::from(r"a\b"));
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn comparable_trims_windows_trailing_dots_and_spaces() {
+        assert_eq!(
+            comparable(Path::new(r"C:\Users\me\Documents.\secret.txt ")),
+            PathBuf::from(r"C:\Users\me\Documents\secret.txt")
+        );
+        assert_eq!(
+            comparable(Path::new(r"\\?\C:\Users\me\Documents.\secret.txt")),
+            PathBuf::from(r"C:\Users\me\Documents\secret.txt")
+        );
     }
 }

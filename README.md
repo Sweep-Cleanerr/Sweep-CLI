@@ -5,7 +5,7 @@
 **Fast, preview-first system cleaning for Windows, Linux, and macOS.**
 
 [![Release](https://img.shields.io/github/v/release/Sweep-Cleanerr/Sweep-CLI?label=release)](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases)
-[![Version](https://img.shields.io/badge/version-0.6.1-blue.svg)](Cargo.toml)
+[![Version](https://img.shields.io/badge/version-0.6.2-blue.svg)](Cargo.toml)
 [![License](https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-1.88%2B-orange.svg)](Cargo.toml)
 [![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)](#platform-support)
@@ -61,25 +61,25 @@ On Windows the binary is `.\target\release\sweep.exe`.
 ### Windows binaries
 
 Portable, single-file builds are published on the
-[v0.6.1 release](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/tag/v0.6.1).
+[v0.6.2 release](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/tag/v0.6.2).
 There is no installer: download, unzip if needed, and run `sweep.exe`.
 
 | Architecture | Build | Download |
 | --- | --- | --- |
-| x64 | MSVC (recommended) | [zip](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.1/sweep-v0.6.1-x86_64-pc-windows-msvc-portable.zip) · [exe](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.1/sweep-v0.6.1-x86_64-pc-windows-msvc.exe) |
-| x64 | GNU | [zip](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.1/sweep-v0.6.1-x86_64-pc-windows-gnu-portable.zip) · [exe](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.1/sweep-v0.6.1-x86_64-pc-windows-gnu.exe) |
-| ARM64 | MSVC | [zip](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.1/sweep-v0.6.1-aarch64-pc-windows-msvc-portable.zip) · [exe](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.1/sweep-v0.6.1-aarch64-pc-windows-msvc.exe) |
+| x64 | MSVC (recommended) | [zip](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.2/sweep-v0.6.2-x86_64-pc-windows-msvc-portable.zip) · [exe](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.2/sweep-v0.6.2-x86_64-pc-windows-msvc.exe) |
+| x64 | GNU | [zip](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.2/sweep-v0.6.2-x86_64-pc-windows-gnu-portable.zip) · [exe](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.2/sweep-v0.6.2-x86_64-pc-windows-gnu.exe) |
+| ARM64 | MSVC | [zip](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.2/sweep-v0.6.2-aarch64-pc-windows-msvc-portable.zip) · [exe](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/download/v0.6.2/sweep-v0.6.2-aarch64-pc-windows-msvc.exe) |
 
 The builds are unsigned; Windows SmartScreen may ask for confirmation on first
 run. Verify the download with the SHA-256 checksums below if needed.
 
 ```text
-sweep-v0.6.1-x86_64-pc-windows-msvc-portable.zip   4c1b8c36448a3b7248ebba50db29e35e48ff7dc68929cf67f6a711ce7f571489
-sweep-v0.6.1-x86_64-pc-windows-msvc.exe            857a3a608dec05f2db69a1520ac682354ed78d1785f6b95680ff267447717a85
-sweep-v0.6.1-x86_64-pc-windows-gnu-portable.zip    4225854563b4f375ba8b681d94b959d342d8ab216254a07973e0898c7d363a63
-sweep-v0.6.1-x86_64-pc-windows-gnu.exe             bb25feb2eba26183a22bd2c385282f5ed369ccfcb3f1e7fe0181f91196886892
-sweep-v0.6.1-aarch64-pc-windows-msvc-portable.zip  83d34ba799fd20ab595c022590d87581a32236562a50485972e86066b332e878
-sweep-v0.6.1-aarch64-pc-windows-msvc.exe           97a92bcb4b0cfab6d8989b154fc31b405dc594f4a31b8edc58b9936c2ca4d2f8
+sweep-v0.6.2-x86_64-pc-windows-msvc-portable.zip   4c1b8c36448a3b7248ebba50db29e35e48ff7dc68929cf67f6a711ce7f571489
+sweep-v0.6.2-x86_64-pc-windows-msvc.exe            857a3a608dec05f2db69a1520ac682354ed78d1785f6b95680ff267447717a85
+sweep-v0.6.2-x86_64-pc-windows-gnu-portable.zip    c0e473574ec7271950b2024720db87ce63111707da4f8cee0d4349bec834ba7f
+sweep-v0.6.2-x86_64-pc-windows-gnu.exe             1cff948b747858e992a340704dcf82bd311506eab31498b5ad061b249740ffd8
+sweep-v0.6.2-aarch64-pc-windows-msvc-portable.zip  83d34ba799fd20ab595c022590d87581a32236562a50485972e86066b332e878
+sweep-v0.6.2-aarch64-pc-windows-msvc.exe           97a92bcb4b0cfab6d8989b154fc31b405dc594f4a31b8edc58b9936c2ca4d2f8
 ```
 
 ```sh
@@ -196,7 +196,7 @@ bench/       Reproducible Sweep vs BleachBit benchmark harness
 
 Release notes and source archives are published on
 [GitHub Releases](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases).
-The current release is [v0.6.1](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/tag/v0.6.1).
+The current release is [v0.6.2](https://github.com/Sweep-Cleanerr/Sweep-CLI/releases/tag/v0.6.2).
 
 ## Development
 
